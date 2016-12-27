@@ -1,0 +1,24 @@
+EXE = Project4_tree2_test.out
+OFILES = tree2_driver.o MMheap.o
+DRIVER = tree2_driver.cpp
+
+$(EXE): $(OFILES)
+	g++ -Wall $(OFILES) -o $(EXE)
+
+tree2_driver.o: MyException.h $(DRIVER)
+	g++ -Wall -c $(DRIVER)
+
+MMheap.o: MMheap.h MMheap.cpp
+	g++ -Wall -c MMheap.cpp
+
+.PHONY: run
+run:
+	./$(EXE) tree2.txt
+
+.PHONY: clean
+clean:
+	rm -rf *~ *# *.o *.h.gch
+
+.PHONY: val
+val:
+	valgrind ./$(EXE) tree2.txt
